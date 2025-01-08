@@ -124,6 +124,12 @@ class HubspotHousecallMiddleware2
 
     
 
+    // public function gethubspotDeals()
+    // {
+    //     $hubspotApiUrl = env('HIBSPOT_API_URL');
+
+    // }
+
 
     // Create Hubspot Contacts
     public function createHubSpotCustomer(array $data)
