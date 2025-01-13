@@ -36,6 +36,8 @@ RUN php artisan view:cache
 
 # Set permissions for Laravel storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 
 # Expose port for Render to route traffic
 EXPOSE 80
