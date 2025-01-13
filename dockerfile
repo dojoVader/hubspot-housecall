@@ -40,5 +40,8 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Expose port 80
 EXPOSE 80
 
+# Command to serve Laravel on the assigned port
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-80}
+
 # Command to start PHP-FPM
 CMD ["php-fpm"]
