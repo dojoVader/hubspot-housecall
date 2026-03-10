@@ -10,11 +10,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/home', [SamController::class, 'index']);
 
-Route::get('/example', function(){
-    return response()->json(['message'=>'API Route is working']);
-});
+
+
 
 Route::post('/sync', function (Request $request) {
     // Your sync logic here (if needed).
@@ -30,12 +28,12 @@ Route::get('/hubspot/contacts', [HubSpotcontroller::class, 'getHubSpotContacts']
 Route::post('/hubspot/contacts', [HubSpotController::class, 'createHubSpotContacts']);
 
 Route::get('/housecallpro/customers', [HouseCallProController::class, 'getHousecallProCustomers']);
+Route::get('/housecallpro/sync-customers', [HouseCallProController::class, 'syncCustomers']);
+Route::get('/housecallpro/sync-estimates', [HouseCallProController::class, 'syncEstimates']);
+Route::get("/housecallpro/sync-jobs", [HouseCallProController::class, 'syncJobs']);
+Route::get('hubspot/search/{phone}',[HubSpotcontroller::class, 'getMobile']);
 
-
-// Route::get('/hubspot/customers', function () {
-//     $middleware = new HubspotHousecallMiddleware2();
-//     return response()->json($middleware->fetchHubSpotRecords());
-// });
+Route::post('/housecallpro/webhook', [HouseCallProController::class, 'webhook']);
 
 Route::get('/housecall/customers', function () {
     $middleware = new HubspotHousecallMiddleware2();

@@ -3,19 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Middleware\HubspotHousecallMiddleware2;
+use App\Http\Middleware\HubspotHousecallMiddleware;
 
 class HubSpotController extends Controller
 {
 
 
-    
+
     public function getHubSpotContacts()
     {
-        $middleware = new HubSpotHousecallMiddleware2();
+        $middleware = new HubSpotHousecallMiddleware();
         $records = $middleware->getHubSpotContacts();
 
         return response()->json($records);
+    }
+
+    public function getContact(string $propertyKey, string $propertyValue){
+
+    }
+
+    public function getMobile(Request $request,$phone): \Illuminate\Http\JsonResponse
+    {
+
+        $middleware = new HubspotHousecallMiddleware();
+        $data = $middleware->getHubspotContactByPhone($phone);
+        return response()->json($data);
     }
 
 
@@ -43,7 +55,7 @@ class HubSpotController extends Controller
         // $response = $middleware->createHubSpotCustmer($hubspotData);
         $response = app(HubSpotHousecallMiddleware::class)->createHubSpotCustomer($hubspotData);
 
-     
+
         if ($response->successful()) {
             return response()->json([
                 'message' => 'customer created Successfully in Hubspot.',
